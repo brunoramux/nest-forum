@@ -20,3 +20,14 @@ Content-Type: application/json
     "email": "323232",
     "password": "12345678"
 }
+
+
+###
+
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+    "email": "brunolemos@bb.com.br",
+    "password": "12345678"
+}
