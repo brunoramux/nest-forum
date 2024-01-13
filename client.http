@@ -48,3 +48,23 @@ POST {{baseUrl}}/questions
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
+{
+    "title": "Nova Pergunta22",
+    "content": "Conteudo"
+}
+
+###
+
+ # @name FetchRecentQuestion
+GET {{baseUrl}}/questions?page=2
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+ # @name FetchRecentQuestion2
+GET {{baseUrl}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+

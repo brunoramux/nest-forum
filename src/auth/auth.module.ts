@@ -24,6 +24,6 @@ import { JwtStrategy } from './jwt.strategy'
       },
     }),
   ],
-  providers: [JwtStrategy], // injeta a strategy que criamos
+  providers: [JwtStrategy], // injeta a strategy que criamos. Strategy de validação do Token
 })
 export class AuthModule {}
