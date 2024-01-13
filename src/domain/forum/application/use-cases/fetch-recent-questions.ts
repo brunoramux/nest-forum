@@ -7,7 +7,7 @@ interface FetchRecentQuestionUseCaseRequest {
   page: number
 }
 type FetchRecentQuestionUseCaseResponse = Either<
-  ResourceNotFoundError,
+  null,
   { questions: Question[] }
 > // Either<L, R> onde L sao os possiveis erros e R e o retorno de sucesso{
 
@@ -18,10 +18,6 @@ export class FetchRecentQuestionsUseCase {
     page,
   }: FetchRecentQuestionUseCaseRequest): Promise<FetchRecentQuestionUseCaseResponse> {
     const questions = await this.questionRepository.findManyRecent({ page })
-
-    if (!questions) {
-      return left(new ResourceNotFoundError())
-    }
 
     return right({
       questions,
