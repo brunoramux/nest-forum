@@ -50,6 +50,15 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.bestAnswerId
   }
 
+  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
+    if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
+      // verifica se bestAnswerId foi enviado e se ela já não era a melhor resposta cadastrada anteriormente
+      this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId))
+    }
+    this.props.bestAnswerId = bestAnswerId
+    this.touch()
+  }
+
   get createdAt() {
     return this.props.createdAt
   }
@@ -76,15 +85,6 @@ export class Question extends AggregateRoot<QuestionProps> {
 
   private touch() {
     this.props.updatedAt = new Date()
-  }
-
-  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
-    if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
-      // verifica se bestAnswerId foi enviado e se ela já não era a melhor resposta cadastrada anteriormente
-      this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId))
-    }
-    this.props.bestAnswerId = bestAnswerId
-    this.touch()
   }
 
   static create(
