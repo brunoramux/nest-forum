@@ -16,6 +16,11 @@ export abstract class Comment<
     return this.props.content
   }
 
+  set content(content: string) {
+    this.props.content = content
+    this.touch()
+  }
+
   get authorId() {
     return this.props.authorId
   }
@@ -30,10 +35,5 @@ export abstract class Comment<
 
   private touch() {
     this.props.updatedAt = new Date()
-  }
-
-  set content(content: string) {
-    this.props.content = content
-    this.touch()
   }
 }

@@ -2,13 +2,13 @@ import { AggregateRoot } from '../entities/aggregate-root'
 import { UniqueEntityId } from '../entities/unique-entity-id'
 import { DomainEvent } from './domain-event'
 
-type DomainEventCallback = (event: any) => void
+type DomainEventCallback = (event: unknown) => void
 
 export class DomainEvents {
   private static handlersMap: Record<string, DomainEventCallback[]> = {} // objeto que representar os subscribers. Parametro string = nome do evento DomainEventCallback = subscribers
-  private static markedAggregates: AggregateRoot<any>[] = [] // os eventos disparados serão do tipo agregados. Um agregado é setado nessa variavel mas o evento ainda não é disparado. O método dispatchAggregateEvents vai disparar o evento posteriormente (garantia que os dados foram salvos corretamente.)
+  private static markedAggregates: AggregateRoot<unknown>[] = [] // os eventos disparados serão do tipo agregados. Um agregado é setado nessa variavel mas o evento ainda não é disparado. O método dispatchAggregateEvents vai disparar o evento posteriormente (garantia que os dados foram salvos corretamente.)
 
-  public static markAggregateForDispatch(aggregate: AggregateRoot<any>) {
+  public static markAggregateForDispatch(aggregate: AggregateRoot<unknown>) {
     // método que adiciona eventos a serem disparados.
     const aggregateFound = !!this.findMarkedAggregateByID(aggregate.id)
 
@@ -17,14 +17,14 @@ export class DomainEvents {
     }
   }
 
-  private static dispatchAggregateEvents(aggregate: AggregateRoot<any>) {
+  private static dispatchAggregateEvents(aggregate: AggregateRoot<unknown>) {
     // método que dispara os eventos
     aggregate.domainEvents.forEach((event: DomainEvent) => this.dispatch(event))
   }
 
   private static removeAggregateFromMarkedDispatchList(
     // remove evento apos ele ser disparado
-    aggregate: AggregateRoot<any>,
+    aggregate: AggregateRoot<unknown>,
   ) {
     const index = this.markedAggregates.findIndex((a) => a.equals(aggregate))
 
@@ -33,7 +33,7 @@ export class DomainEvents {
 
   private static findMarkedAggregateByID(
     id: UniqueEntityId,
-  ): AggregateRoot<any> | undefined {
+  ): AggregateRoot<unknown> | undefined {
     return this.markedAggregates.find((aggregate) => aggregate.id.equals(id))
   }
 

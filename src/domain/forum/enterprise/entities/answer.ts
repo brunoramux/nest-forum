@@ -19,6 +19,11 @@ export class Answer extends AggregateRoot<AnswerProps> {
     return this.props.content
   }
 
+  set content(content: string) {
+    this.props.content = content
+    this.touch()
+  }
+
   get authorId() {
     return this.props.authorId
   }
@@ -39,21 +44,16 @@ export class Answer extends AggregateRoot<AnswerProps> {
     return this.props.attachments
   }
 
+  set attachaments(attachament: AnswerAttachmentList) {
+    this.props.attachments = attachament
+  }
+
   get excerpt() {
     return this.content.substring(0, 120).trimEnd().concat('...')
   }
 
   private touch() {
     this.props.updatedAt = new Date()
-  }
-
-  set content(content: string) {
-    this.props.content = content
-    this.touch()
-  }
-
-  set attachaments(attachament: AnswerAttachmentList) {
-    this.props.attachments = attachament
   }
 
   static create(

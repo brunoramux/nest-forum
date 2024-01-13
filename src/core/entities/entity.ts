@@ -13,7 +13,7 @@ export class Entity<Props> {
     this.props = props
   }
 
-  public equals(entity: Entity<any>) {
+  public equals(entity: Entity<unknown>) {
     // usar  esse metodo sempre que precisarmos validar se uma entidade e igual a outra
     if (entity === this) {
       return true

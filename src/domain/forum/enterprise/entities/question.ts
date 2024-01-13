@@ -23,8 +23,19 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.title
   }
 
+  set title(title: string) {
+    this.props.title = title
+    this.props.slug = Slug.createFromText(title)
+    this.touch()
+  }
+
   get content() {
     return this.props.content
+  }
+
+  set content(content: string) {
+    this.props.content = content
+    this.touch()
   }
 
   get slug() {
@@ -51,6 +62,10 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.attachments
   }
 
+  set attachaments(attachament: QuestionAttachmentList) {
+    this.props.attachments = attachament
+  }
+
   get isNew(): boolean {
     return dayjs().diff(this.createdAt, 'days') <= 3
   }
@@ -63,17 +78,6 @@ export class Question extends AggregateRoot<QuestionProps> {
     this.props.updatedAt = new Date()
   }
 
-  set title(title: string) {
-    this.props.title = title
-    this.props.slug = Slug.createFromText(title)
-    this.touch()
-  }
-
-  set content(content: string) {
-    this.props.content = content
-    this.touch()
-  }
-
   set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
     if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
       // verifica se bestAnswerId foi enviado e se ela já não era a melhor resposta cadastrada anteriormente
@@ -81,10 +85,6 @@ export class Question extends AggregateRoot<QuestionProps> {
     }
     this.props.bestAnswerId = bestAnswerId
     this.touch()
-  }
-
-  set attachaments(attachament: QuestionAttachmentList) {
-    this.props.attachments = attachament
   }
 
   static create(
