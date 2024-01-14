@@ -14,7 +14,7 @@ export interface QuestionProps {
   authorId: UniqueEntityId
   bestAnswerId?: UniqueEntityId
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
   attachments: QuestionAttachmentList
 }
 export class Question extends AggregateRoot<QuestionProps> {

@@ -48,7 +48,7 @@ describe('Fetch Recent Questions', () => {
       page: 2,
     })
 
-    expect(result.isRight).toBe(true)
+    expect(result.isRight()).toBe(true)
     expect(result.value?.questions).toHaveLength(2)
   })
 })
