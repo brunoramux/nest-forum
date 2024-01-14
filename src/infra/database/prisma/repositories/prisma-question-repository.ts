@@ -43,7 +43,7 @@ export class PrismaQuestionRepository implements QuestionRepository {
     })
 
     return questions.map((question) => {
-      return PrismaQuestionMapper.toDomain(question)
+      return PrismaQuestionMapper.toDomain(question) // devolvo para o caso de uso Question de dominio
     })
   }
 
