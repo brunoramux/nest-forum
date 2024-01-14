@@ -11,7 +11,7 @@ interface AuthenticateStudentUseCaseRequest {
 }
 type AuthenticateStudentUseCaseResponse = Either<
   WrongCredentialsError,
-  { accessToken: string }
+  { access_token: string }
 > // Either<L, R> onde L sao os possiveis erros e R e o retorno de sucesso{
 
 @Injectable()
@@ -40,12 +40,14 @@ export class AuthenticateStudentUseCase {
     if (!isPasswordValid) {
       return left(new WrongCredentialsError())
     }
-    const accessToken = await this.encrypter.encrypt({
+    // eslint-disable-next-line camelcase
+    const access_token = await this.encrypter.encrypt({
       sub: student.id.toString(),
     })
 
     return right({
-      accessToken,
+      // eslint-disable-next-line camelcase
+      access_token,
     })
   }
 }
