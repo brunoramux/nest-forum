@@ -43,13 +43,13 @@ Content-Type: application/json
 
 ###
 
- # @name AuthenticantionSuccess
+ # @name Create-Question
 POST {{baseUrl}}/questions
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Nova Pergunta22",
+    "title": "Nova Pergunta23",
     "content": "Conteudo"
 }
 

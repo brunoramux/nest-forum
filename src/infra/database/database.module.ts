@@ -6,6 +6,7 @@ import { PrismaQuestionCommentsRepository } from './prisma/repositories/prisma-q
 import { PrismaQuestionRepository } from './prisma/repositories/prisma-question-repository'
 import { PrismaAnswerRepository } from './prisma/repositories/prisma-answer-repository'
 import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-answer-comments-repository'
+import { QuestionRepository } from '@/domain/forum/application/repositories/question-repository'
 
 @Module({
   providers: [
@@ -13,7 +14,10 @@ import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-ans
     PrismaQuestionAttachmentRepository,
     PrismaAnswerAttachmentsRepository,
     PrismaQuestionCommentsRepository,
-    PrismaQuestionRepository,
+    {
+      provide: QuestionRepository,
+      useClass: PrismaQuestionRepository,
+    },
     PrismaAnswerRepository,
     PrismaAnswerCommentsRepository,
   ],
@@ -22,7 +26,7 @@ import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-ans
     PrismaQuestionAttachmentRepository,
     PrismaAnswerAttachmentsRepository,
     PrismaQuestionCommentsRepository,
-    PrismaQuestionRepository,
+    QuestionRepository,
     PrismaAnswerRepository,
     PrismaAnswerCommentsRepository,
   ], // faz com que possamos utilizar o PrismaServices no módulos que importar o DatabaseModule

@@ -3,8 +3,8 @@ import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
 import { TokenSchema } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { z } from 'zod'
+import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question'
 
 const createQuestionBodySchema = z.object({
   title: z.string(),
@@ -16,7 +16,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 @Controller('/questions')
 @UseGuards(JwtAuthGuard) // Rota autenticada
 export class CreateQuestionController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private createQuestion: CreateQuestionUseCase) {}
 
   @Post()
   async handle(
@@ -26,29 +26,12 @@ export class CreateQuestionController {
   ) {
     const { content, title } = body
     const { sub: userId } = user
-    const slug = this.createFromText(title)
 
-    await this.prisma.question.create({
-      data: {
-        content,
-        title,
-        slug,
-        authorId: userId,
-      },
+    await this.createQuestion.execute({
+      title,
+      content,
+      authorId: userId,
+      attachmentsIds: [],
     })
-  }
-
-  private createFromText(text: string) {
-    const slugText = text
-      .normalize('NFKD')
-      .toLowerCase() // minusculo
-      .trim() // tira espaços
-      .replace(/\s+/g, '-') // s = whitespace. Substitui espaços em branco por string vazia
-      .replace(/[^\w-]+/g, '') // \w = todas as palavras, + = um ou mais vezes. O que não são palavras serão substituidos por string vazia. g = global
-      .replace(/_/g, '-') // remove underline e substitui por hífen
-      .replace(/--+/g, '-') // tira lugares onde aparecem dois hífens e troca por um só
-      .replace(/-$/g, '') // $ = final da string. Substitui hifem do final por string vazio
-
-    return slugText
   }
 }

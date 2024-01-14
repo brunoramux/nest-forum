@@ -10,26 +10,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  STUDENT
+  INSTRUCTOR
+}
+
 model User {
   id        String     @id @default(uuid())
   name      String
   email     String     @unique
   password  String
-  questions Question[]
+  role      UserRole   @default(STUDENT)
+  questions Question[] @relation("question-user")
+  answers   Answer[]   @relation("answer-author")
 
   @@map("users") // renomeia tabela para lowercase
 }
 
 model Question {
-  id        String    @id @default(uuid())
-  title     String
-  slug      String    @unique
-  content   String
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt @map("updated_at") // preenche automaticamente toda vez que a Question for alterada
+  id           String    @id @default(uuid())
+  title        String
+  slug         String    @unique
+  content      String
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at") // preenche automaticamente toda vez que a Question for alterada
+  bestAnswerId String?   @unique @map("best_answer_id") // usamos o unique pois uma Question pode ter apenas uma bestAnswer
+  authorId     String    @map("author_id")
 
-  author   User   @relation(fields: [authorId], references: [id]) // relacionamento
-  authorId String @map("author_id")
+  author User @relation("question-user", fields: [authorId], references: [id]) // relacionamento
+
+  bestAnswer Answer?  @relation("bestAnswer", fields: [bestAnswerId], references: [id])
+  answers    Answer[] @relation("question-answer")
 
   @@map("question")
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  content    String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  authorId   String   @map("author_id")
+  questionId String   @map("question_id")
+
+  author User @relation("answer-author", fields: [authorId], references: [id])
+
+  bestAnswerOn Question? @relation("bestAnswer")
+
+  question Question @relation("question-answer", fields: [questionId], references: [id])
+
+  @@map("answers")
 }
