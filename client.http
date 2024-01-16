@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "name": "Bruno Ramos",
-    "email": "323232",
+    "email": "brunolemos11@bb.com.br",
     "password": "12345678"
 }
 
@@ -49,7 +49,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Nova Pergunta23",
+    "title": "Nova Pergunta25",
     "content": "Conteudo"
 }
 
