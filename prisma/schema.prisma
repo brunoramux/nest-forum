@@ -23,6 +23,7 @@ model User {
   role      UserRole   @default(STUDENT)
   questions Question[] @relation("question-user")
   answers   Answer[]   @relation("answer-author")
+  comments  Comment[]  @relation("Comment - Author")
 
   @@map("users") // renomeia tabela para lowercase
 }
@@ -39,8 +40,10 @@ model Question {
 
   author User @relation("question-user", fields: [authorId], references: [id]) // relacionamento
 
-  bestAnswer Answer?  @relation("bestAnswer", fields: [bestAnswerId], references: [id])
-  answers    Answer[] @relation("question-answer")
+  bestAnswer  Answer?      @relation("bestAnswer", fields: [bestAnswerId], references: [id])
+  answers     Answer[]     @relation("question-answer")
+  comments    Comment[]
+  attachments Attachment[]
 
   @@map("question")
 }
@@ -57,7 +60,37 @@ model Answer {
 
   bestAnswerOn Question? @relation("bestAnswer")
 
-  question Question @relation("question-answer", fields: [questionId], references: [id])
+  question    Question     @relation("question-answer", fields: [questionId], references: [id])
+  comments    Comment[]
+  attachments Attachment[]
 
   @@map("answers")
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  content    String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  authorId   String   @map("author_id")
+  questionId String?  @map("question_id")
+  answerId   String?  @map("answer_id")
+
+  user     User      @relation("Comment - Author", fields: [authorId], references: [id])
+  question Question? @relation(fields: [questionId], references: [id])
+  answer   Answer?   @relation(fields: [answerId], references: [id])
+
+  @@map("comments")
+}
+
+model Attachment {
+  id         String    @id @default(uuid())
+  title      String
+  url        String
+  questionId String?   @map("question_id")
+  answerId   String?   @map("answer_id")
+  question   Question? @relation(fields: [questionId], references: [id])
+  answer     Answer?   @relation(fields: [answerId], references: [id])
+
+  @@map("attachments")
 }

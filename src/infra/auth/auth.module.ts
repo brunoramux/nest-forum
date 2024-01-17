@@ -15,7 +15,7 @@ import { EnvService } from '../env/env.service'
       inject: [EnvService], // usando um serviço no registro de um modulo. Usamos aqui o ConfigService para pegar variaveis ambiente
       global: true, // todos os modulos da aplicação poderão acessar
       useFactory(env: EnvService) {
-        // "true" informa que nos garantimos a verificacao da tipagem onde pode ser undefined
+        // acesso as variaveis ambiente
         const privateKey = env.get('JWT_PRIVATE_KEY')
         const publicKey = env.get('JWT_PUBLIC_KEY') // pegamos o secret de dentro do env
 

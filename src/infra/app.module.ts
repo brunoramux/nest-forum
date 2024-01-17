@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common'
-import { PrismaService } from './database/prisma/prisma.service'
-import { CreateAccountController } from './http/controllers/create-account.controller'
 import { ConfigModule } from '@nestjs/config'
 import { envSchema } from './env/env'
 import { AuthModule } from './auth/auth.module'

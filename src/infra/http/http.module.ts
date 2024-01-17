@@ -11,7 +11,7 @@ import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases
 import { CryptographyModule } from '../cryptography/cryptography.module'
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule], // Outros módulo usados pelos Controllers e pelos Casos de Uso
+  imports: [DatabaseModule, CryptographyModule], // Outros módulos usados pelos Controllers e pelos Casos de Uso
   controllers: [
     CreateAccountController,
     AuthenticateController,
