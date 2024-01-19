@@ -16,12 +16,12 @@ const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema) // Nova 
 
 @Controller('/questions')
 export class FetchRecentQuestionsController {
-  constructor(private fetchRecenteQuestions: FetchRecentQuestionsUseCase) {}
+  constructor(private fetchRecentQuestions: FetchRecentQuestionsUseCase) {}
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
     // informo a PIPE para validação dos Query Params
-    const result = await this.fetchRecenteQuestions.execute({
+    const result = await this.fetchRecentQuestions.execute({
       page,
     })
 
