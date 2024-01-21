@@ -9,29 +9,46 @@ import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-ans
 import { QuestionRepository } from '@/domain/forum/application/repositories/question-repository'
 import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-repository'
+import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
+import { AnswersRepository } from '@/domain/forum/application/repositories/answer-repository'
+import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
 
 @Module({
   providers: [
     PrismaService,
-    PrismaQuestionAttachmentRepository,
-    PrismaAnswerAttachmentsRepository,
-    PrismaQuestionCommentsRepository,
+    { provide: StudentsRepository, useClass: PrismaStudentsRepository },
     {
       provide: QuestionRepository,
       useClass: PrismaQuestionRepository,
     },
-    { provide: StudentsRepository, useClass: PrismaStudentsRepository },
-    PrismaAnswerRepository,
-    PrismaAnswerCommentsRepository,
+    {
+      provide: QuestionAttachmentsRepository,
+      useClass: PrismaQuestionAttachmentRepository,
+    },
+    {
+      provide: QuestionCommentsRepository,
+      useClass: PrismaQuestionCommentsRepository,
+    },
+    { provide: AnswersRepository, useClass: PrismaAnswerRepository },
+    {
+      provide: AnswerAttachmentsRepository,
+      useClass: PrismaAnswerAttachmentsRepository,
+    },
+    {
+      provide: AnswerCommentsRepository,
+      useClass: PrismaAnswerCommentsRepository,
+    },
   ],
   exports: [
     PrismaService,
-    PrismaQuestionAttachmentRepository,
-    PrismaAnswerAttachmentsRepository,
-    PrismaQuestionCommentsRepository,
+    QuestionAttachmentsRepository,
+    AnswerAttachmentsRepository,
+    QuestionCommentsRepository,
     QuestionRepository,
-    PrismaAnswerRepository,
-    PrismaAnswerCommentsRepository,
+    AnswersRepository,
+    AnswerCommentsRepository,
     StudentsRepository,
   ], // faz com que possamos utilizar o PrismaServices no módulos que importar o DatabaseModule
 })
