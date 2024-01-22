@@ -8,7 +8,7 @@ import request from 'supertest'
 import { QuestionFactory } from 'test/factories/make-question'
 import { StudentFactory } from 'test/factories/make-student'
 
-describe('Answer Question (E2E)', () => {
+describe('Comment on Question (E2E)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService
