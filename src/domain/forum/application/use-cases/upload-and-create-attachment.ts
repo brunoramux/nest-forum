@@ -44,7 +44,6 @@ export class UploadAndCreateAttachmentUseCase {
       title: fileName,
       link: fileName,
     })
-    console.log(attachment)
 
     await this.attachmentsRepository.create(attachment)
     return right({

@@ -36,5 +36,6 @@ describe('Create Question', () => {
       expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
     ])
+    expect(inMemoryQuestionAttachmentRepository.items).toHaveLength(2) // garante que os attachments estao sendo persistidos
   })
 })
