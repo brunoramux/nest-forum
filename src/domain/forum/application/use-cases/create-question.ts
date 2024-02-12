@@ -38,7 +38,8 @@ export class CreateQuestionUseCase {
       })
     })
 
-    question.attachaments = new QuestionAttachmentList(questionAttachments) // crio um watchedList
+    question.attachments = new QuestionAttachmentList(questionAttachments) // crio um watchedList
+    console.log(question.attachments.getItems())
 
     await this.questionRepository.create(question)
 

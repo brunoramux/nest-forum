@@ -67,12 +67,12 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.updatedAt
   }
 
-  get attachaments() {
+  get attachments() {
     return this.props.attachments
   }
 
-  set attachaments(attachament: QuestionAttachmentList) {
-    this.props.attachments = attachament
+  set attachments(attachment: QuestionAttachmentList) {
+    this.props.attachments = attachment
   }
 
   get isNew(): boolean {
