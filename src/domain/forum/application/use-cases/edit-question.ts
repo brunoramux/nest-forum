@@ -62,10 +62,10 @@ export class EditQuestionUseCase {
     })
 
     questionAttachmentList.update(questionAttachments) // faz update com novos attachments
-
+    console.log(questionAttachmentList.getRemovedItems())
     question.title = title
     question.content = content
-    question.attachaments = questionAttachmentList // altera a question
+    question.attachments = questionAttachmentList // altera a question
 
     await this.questionRepository.save(question)
 

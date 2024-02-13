@@ -40,11 +40,11 @@ export class Answer extends AggregateRoot<AnswerProps> {
     return this.props.updatedAt
   }
 
-  get attachaments() {
+  get attachments() {
     return this.props.attachments
   }
 
-  set attachaments(attachament: AnswerAttachmentList) {
+  set attachments(attachament: AnswerAttachmentList) {
     this.props.attachments = attachament
   }
 

@@ -39,7 +39,8 @@ export class AnswerQuestionUseCase {
       })
     })
 
-    answer.attachaments = new AnswerAttachmentList(answerAttachments) // crio um watchedList
+    answer.attachments = new AnswerAttachmentList(answerAttachments) // crio um watchedList
+
     await this.answersRepository.create(answer)
 
     return right({ answer })
