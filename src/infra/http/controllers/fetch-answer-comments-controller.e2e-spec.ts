@@ -7,7 +7,6 @@ import request from 'supertest'
 import { AnswerFactory } from 'test/factories/make-answer'
 import { AnswerCommentFactory } from 'test/factories/make-answer-comment'
 import { QuestionFactory } from 'test/factories/make-question'
-import { QuestionCommentFactory } from 'test/factories/make-question-comment'
 import { StudentFactory } from 'test/factories/make-student'
 
 describe('Fetch question comments (E2E)', () => {
@@ -71,7 +70,12 @@ describe('Fetch question comments (E2E)', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      answerComments: [expect.objectContaining({ content: 'Comentario 1' })],
+      answerComments: [
+        expect.objectContaining({
+          content: 'Comentario 1',
+          authorName: 'John Doe',
+        }),
+      ],
     })
   })
 })
