@@ -4,6 +4,14 @@ import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-atta
 export class InMemoryAnswerAttachmentsRepository
   implements AnswerAttachmentsRepository
 {
+  createMany(attachment: AnswerAttachment[]): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
+
+  deleteMany(attachment: AnswerAttachment[]): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
+
   public items: AnswerAttachment[] = []
 
   async findManyByAnswerId(answerId: string) {

@@ -1,7 +1,7 @@
-import { Answer } from '@/domain/forum/enterprise/entities/answer'
+import { Comment } from '@prisma/client'
 
 export class CommentPresenter {
-  static toHTTP(comment: Comment<any>) {
+  static toHTTP(comment: Comment) {
     return {
       id: comment.id.toString(),
       content: comment.content,

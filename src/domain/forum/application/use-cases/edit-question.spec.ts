@@ -59,10 +59,10 @@ describe('Edit Question', () => {
       content: 'Conteúdo teste',
     })
     expect(
-      inMemoryQuestionRepository.items[0].attachaments.currentItems,
+      inMemoryQuestionRepository.items[0].attachments.currentItems,
     ).toHaveLength(2)
     expect(
-      inMemoryQuestionRepository.items[0].attachaments.currentItems,
+      inMemoryQuestionRepository.items[0].attachments.currentItems,
     ).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),

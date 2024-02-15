@@ -56,14 +56,12 @@ describe('Edit Answer', () => {
       content: 'content-2',
     })
     expect(
-      inMemoryAnswerRepository.items[0].attachaments.currentItems,
+      inMemoryAnswerRepository.items[0].attachments.currentItems,
     ).toHaveLength(2)
-    expect(inMemoryAnswerRepository.items[0].attachaments.currentItems).toEqual(
-      [
-        expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
-        expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
-      ],
-    )
+    expect(inMemoryAnswerRepository.items[0].attachments.currentItems).toEqual([
+      expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
+      expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
+    ])
   })
 
   it('It should not be able to update a answer from other authors', async () => {
