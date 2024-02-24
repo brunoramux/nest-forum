@@ -56,11 +56,12 @@ export class PrismaQuestionRepository implements QuestionRepository {
   }
 
   async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
+    const perPage = 20
     const questions = await this.prisma.question.findMany({
       orderBy: {
         createdAt: 'desc',
       },
-      take: 20,
+      take: perPage,
       skip: (page - 1) * 20,
     })
 
