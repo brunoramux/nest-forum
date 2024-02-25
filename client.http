@@ -30,7 +30,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "brunolemos@bb.com.br",
+    "email": "brunolemos1@bb.com.br",
     "password": "12345678"
 }
 
@@ -49,8 +49,9 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Nova Pergunta25",
-    "content": "Conteudo"
+    "title": "Nova Pergunta",
+    "content": "Conteudo",
+    "attachments": ["f003f723-51fc-4880-925f-bdb04f093c24"]
 }
 
 ###
@@ -64,6 +65,33 @@ Authorization: Bearer {{authToken}}
 
  # @name FetchRecentQuestion2
 GET {{baseUrl}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+ # @name Create-Answer
+POST {{baseUrl}}/questions/6f83be82-374c-4b98-b060-fc867621dc73/answer
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "Nova Resposta",
+    "content": "Conteudo",
+    "attachments": []
+}
+
+###
+
+ # @name FetchAnswers
+GET {{baseUrl}}/questions/6f83be82-374c-4b98-b060-fc867621dc73/answers
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+ # @name Create Attachment
+POST {{baseUrl}}/attachments/
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 

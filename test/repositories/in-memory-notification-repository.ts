@@ -19,13 +19,9 @@ export class InMemoryNotificationRepository implements NotificationRespository {
     )
 
     this.items[notificationIndex] = notification
-
-    return notification
   }
 
   async create(notification: Notification) {
     this.items.push(notification)
-
-    return notification
   }
 }

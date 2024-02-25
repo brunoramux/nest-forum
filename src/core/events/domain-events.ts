@@ -8,6 +8,8 @@ export class DomainEvents {
   private static handlersMap: Record<string, DomainEventCallback[]> = {} // objeto que representar os subscribers. Parametro string = nome do evento DomainEventCallback = subscribers
   private static markedAggregates: AggregateRoot<unknown>[] = [] // os eventos disparados serão do tipo agregados. Um agregado é setado nessa variavel mas o evento ainda não é disparado. O método dispatchAggregateEvents vai disparar o evento posteriormente (garantia que os dados foram salvos corretamente.)
 
+  public static shouldRun = true
+
   public static markAggregateForDispatch(aggregate: AggregateRoot<unknown>) {
     // método que adiciona eventos a serem disparados.
     const aggregateFound = !!this.findMarkedAggregateByID(aggregate.id)
@@ -73,6 +75,10 @@ export class DomainEvents {
     const eventClassName: string = event.constructor.name
 
     const isEventRegistered = eventClassName in this.handlersMap // verifica se o register foi executado para aquele evento
+
+    if (!this.shouldRun) {
+      return
+    }
 
     if (isEventRegistered) {
       const handlers = this.handlersMap[eventClassName]

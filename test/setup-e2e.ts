@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/core/events/domain-events'
 import { PrismaClient } from '@prisma/client'
 import { execSync } from 'child_process'
 import { randomUUID } from 'crypto'
@@ -21,6 +22,9 @@ beforeAll(async () => {
   const databaseURL = generateUniqueDatabaseUrl(schemaId)
 
   process.env.DATABASE_URL = databaseURL // sobrescrevo a variavel ambiente de conexao do banco de dados para que as operacoes sejam executas dentro de outro schema e não afete o banco 'real'
+
+  DomainEvents.shouldRun = false
+  // execSync('npx prisma migrate reset')
 
   execSync('npx prisma migrate deploy') // gera mas migrations e atualiza o banco de dados.
 })
