@@ -7,7 +7,7 @@ export class AnswerPresenter {
       content: answer.content,
       authorId: answer.authorId,
       questionId: answer.questionId,
-      attachments: answer.attachaments,
+      attachments: answer.attachments,
       createdAt: answer.createdAt,
       updatedAt: answer.updatedAt,
     }

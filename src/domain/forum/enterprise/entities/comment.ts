@@ -6,7 +6,7 @@ export interface CommentProps {
   authorId: UniqueEntityId
   content: string
   createdAt: Date
-  updatedAt?: Date | null
+  updatedAt?: Date
 }
 export abstract class Comment<
   Props extends CommentProps, // permite que possamos adicionar itens dentro da tipagem via classe pai
