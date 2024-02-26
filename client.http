@@ -95,4 +95,11 @@ POST {{baseUrl}}/attachments/
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
+###
+
+ # @name Create Attachment
+PATCH {{baseUrl}}/notifications/534f9c52-fd16-4247-be61-3e61db2b26cc/read
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
 

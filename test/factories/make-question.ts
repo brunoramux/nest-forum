@@ -20,7 +20,7 @@ export function makeQuestion(
       authorId: new UniqueEntityId(),
       content: faker.lorem.text(),
       title: faker.lorem.sentence(),
-      slug: Slug.createFromText('Example Title'),
+      slug: new Slug(faker.lorem.text()),
       ...override, // as informacoes que forem passadas via parametro para a funcao makeQuestion serao usadas por cima das informacoes acima.
     },
     id,
